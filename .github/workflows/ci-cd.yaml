@@ -10,9 +10,6 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZUREAPPSERVICE_PUBLISH_SECRET }}
 
     - name: Check out code 
       uses: actions/checkout@v2
@@ -34,6 +31,11 @@ jobs:
     - name: publish app
       run: dotnet publish -c Release -o ./out
     
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZUREAPPSERVICE_PUBLISH_SECRET }}
+
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
