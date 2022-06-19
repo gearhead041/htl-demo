@@ -31,8 +31,6 @@ jobs:
     - name: publish app
       run: dotnet publish -c Release -o ./out
     
-
-
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
