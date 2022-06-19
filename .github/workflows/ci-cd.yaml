@@ -9,6 +9,11 @@ jobs:
   build:
    runs-on: ubuntu-latest
    steps:
+     
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZUREAPPSERVICE_PUBLISH_SECRET }}
+
     - name: Check out code 
       uses: actions/checkout@v2
 
