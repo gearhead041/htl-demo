@@ -25,3 +25,13 @@ jobs:
     
     - name: Run Tests
       run: dotnet test -c Release --no-restore
+
+    - name: publish app
+      run: dotnet publish -c Release -o/.out
+    
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'myfirst-webapp'
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1C43AF22F1444B91BAB2D6EA2CA18E90 }}
+        package: ./out
