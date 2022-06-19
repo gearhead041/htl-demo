@@ -32,6 +32,6 @@ jobs:
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'myfirst-webapp'
+        app-name: myfirst-webapp
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISH_SECRET}}
         package: ./out
