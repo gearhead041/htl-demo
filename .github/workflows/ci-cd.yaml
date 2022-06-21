@@ -1,4 +1,4 @@
-name: Continous Integration
+﻿name: Continous Integration
 
 on:
   push:
@@ -12,24 +12,34 @@ jobs:
     - name: Check out code 
       uses: actions/checkout@v2
 
-    - name: Setup .NET 6
+    - name: Setup .NET 6 🔨
       uses: actions/setup-dotnet@v1
       with:
        dotnet-version: '6.0.x'
     
+    - name: Start SQL Server
+      run: |
+        docker run -d -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Pa55w@r8" -e "MSSQL_PID=Express" -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest 
+    - name: Wait for 5s
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '5s'
+
     - name: Restore packages
       run: dotnet restore
 
-    - name: Build dotent 
+    - name: Build dotent 👷‍
       run: dotnet build -c Release --no-restore
     
-    - name: Run Tests
+    - name: Run Tests 🧪
+      env:
+        ConnectionStrings_DefaultConnection: Server=localhost;Database=CustomersDemo_Test;User=sa;Password=Pa55w@r8
       run: dotnet test -c Release --no-restore
 
     - name: publish app
       run: dotnet publish -c Release -o './out'
     
-    - name: Deploy to Azure
+    - name: Deploy to Azure 🚀
       uses: azure/webapps-deploy@v2
       with:
         app-name: myfirst-webapp
