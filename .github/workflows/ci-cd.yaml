@@ -34,7 +34,7 @@ jobs:
     - name: Run Tests 🧪
       env:
         ConnectionStrings_DefaultConnection: Server=localhost;Database=CustomersDemo_Test;User=sa;Password=Pa55w@r8
-      run: dotnet test -c Release --no-restore
+      run: dotnet test -c Release --no-build
 
     - name: publish app
       run: dotnet publish -c Release -o './out'
