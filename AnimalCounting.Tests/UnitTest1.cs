@@ -34,8 +34,6 @@ namespace AnimalCounting.Tests
             var result =  (await controller.GetAll()).ToArray();
             Assert.Single(result);
             Assert.Equal("Foobar", result[0].Name);
-
-
         }
 
     }
